@@ -1,0 +1,421 @@
+---
+title: "Relaciones entre variables"
+subtitle: "Universidad Católica de Córdoba"
+author: Matías A. Alfonso
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  ioslides_presentation:
+      css: "../css/styles.css"
+      self_contained: false
+      logo: "../img/logo_UNC.png"
+      incremental: true
+      df_print: kable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+## Para poder imprimir las tablas con kable_styling
+options("kableExtra.html.bsTable" = T, knitr.kable.NA = '')
+library(tables)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+```
+
+## Relaciones entre variables
+* Hasta ahora, nos hemos centrado en la descripción de variables individuales.
+* Comenzaremos a hablar de **relaciones** entre variables.
+* Hablaremos de **asociación** entre variables.
+* **Asociación** no implica **causalidad**
+* Utilizaremos medidas, tablas y gráficos para evaluar la intensidad de esa asociación.
+
+## Tablas de contingencia
+
+
+* También llamadas **tabla bivariada**, **tabla de contingencia** o **tabla de distribución conjunta**.
+* Es una **tabla** donde las filas son las categorías de una variable y las **columnas** son las categorías de otra.
+* Las **frecuencias conjuntas** indican la cantidad de casos que corresponden a las categorías de ambas variables.
+* Las **frecuencias marginales** son los totales por fila y por columna.
+* Se pueden realizar en variables **nominales** y **ordinales** (y en variables de nivel superior)
+
+## Ejemplo
+
+* Supongamos que queremos saber si el autoritarismo del docente está relacionado al rendimiento de los alumnos
+* Tenemos entonces las siguientes variables:
+
+* Tipo de docente:
+    1. Autoritario
+    2. Democrático
+    
+* Rendimiento:
+    1. Bajo
+    2. Medio
+    3. Alto
+    
+      
+---
+
+## Matriz de datos
+
+```{r, echo = FALSE}
+ensennanza <- read.csv2("../data/tipoEnsennanza.csv")
+
+kable(ensennanza) %>% 
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = F) %>% 
+     scroll_box(width = "100%", height = "500px")
+
+```
+
+## Tabla de contingencia
+  
+```{r, echo = FALSE}
+mat <- matrix(rep(NA, 6), 2, byrow = TRUE)
+mat <- addmargins(mat)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+# tabular(as.table(mat))
+
+# toKable(as.tabular(mat))
+
+mat %>%  
+    kable(digits = 2, col.names = c("Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = F) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) %>% 
+    group_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+## Tabla de contingencia
+
+```{r, echo = FALSE}
+ensennanza$rendimiento <- factor(ensennanza$rendimiento, labels = c("Bajo", "Medio", "Alto"), ordered = TRUE)
+mat <- table(ensennanza$tipo, ensennanza$rendimiento)
+mat <- addmargins(mat)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+# tabular(as.table(mat))
+
+# toKable(as.tabular(mat))
+
+mat %>%  
+    kable(digits = 2, col.names = c("Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = F) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) %>% 
+    group_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+## Tabla de contingencia
+
+* La fila y columna **Total** se denominan **frecuencias marginales** por fila y por columna.
+* Las tablas de contingencia también se pueden presentar por **frecuencias relativas por fila**, **frecuencias relativas por columna** y **frecuencias relativas al total**.
+* Construyamos estas tres tablas en el ejemplo anterior.
+
+## Frecuencias relativas por filas
+
+```{r, echo = FALSE}
+ensennanza$rendimiento <- factor(ensennanza$rendimiento, labels = c("Bajo", "Medio", "Alto"), ordered = TRUE)
+mat <- table(ensennanza$tipo, ensennanza$rendimiento)
+mat <- addmargins(mat, 1)
+mat <- prop.table(mat, 1)
+mat <- addmargins(mat, 2)
+
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+# tabular(as.table(mat))
+
+# toKable(as.tabular(mat))
+
+format(mat, digits = 2, nsmall = 2) %>%  
+    kable(digits = 2, col.names = c("Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = F) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) %>% 
+    group_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+## Frecuencias relativas por fila
+
+* ¿Cómo se lee?
+* El 26% de los alumnos que tuvieron un docente autoritario tiene rendimiento bajo
+* El 31% de los alumnos que tuvieron un docente democrático tiene rendimiento alto
+* El 29% de los alumnos tiene rendimiento bajo
+
+
+## Frecuencias relativas por columna
+
+```{r, echo = FALSE}
+ensennanza$rendimiento <- factor(ensennanza$rendimiento, labels = c("Bajo", "Medio", "Alto"), ordered = TRUE)
+mat <- table(ensennanza$tipo, ensennanza$rendimiento)
+mat <- addmargins(mat, 2)
+mat <- prop.table(mat, 2)
+mat <- addmargins(mat, 1)
+
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+# tabular(as.table(mat))
+
+# toKable(as.tabular(mat))
+
+mat %>%  
+    kable(digits = 2, col.names = c("Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = F) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) %>% 
+    group_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+## Frecuencias relativas por columna
+
+* El 34% de los alumnos con rendimiento bajo tuvo un docente autoritario
+* El 66% de los docentes con rendimiento bajo tuvo un docente democrático
+* El 39% de los alumnos tuvieron un docente autoritario
+
+## Frecuencias relativas al total
+
+```{r, echo = FALSE}
+ensennanza$rendimiento <- factor(ensennanza$rendimiento, labels = c("Bajo", "Medio", "Alto"), ordered = TRUE)
+mat <- table(ensennanza$tipo, ensennanza$rendimiento)
+mat <- prop.table(mat)
+mat <- addmargins(mat)
+
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+# tabular(as.table(mat))
+
+# toKable(as.tabular(mat))
+
+format(mat, digits = 2, nsmall = 2) %>%  
+    kable(digits = 2, col.names = c("Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = F) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) %>% 
+    group_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+## Frecuencias relativas al total
+
+* El 10% de los alumnos tuvieron un docente autoritario y un rendimiento bajo
+* El 19% de los alumnos tuvieron un docente democrático y un rendimiento alto 
+* El 29% de los alumnos tuvo un rendimiento bajo.
+
+## El grado de asociación
+
+* Decimos que eventos son independientes si la ocurrencia de uno de ellos no afecta la ocurrencia del otro.
+* **Definición**: Dos variables son estadísticamente independientes si la frecuencia relativa de cada celda es igual al producto de las **frecuencias relativas marginales** de la fila y columna a las que la celda pertenece.
+* Volvamos al ejemplo anterior, pero ahora supongamos que medimos la variable rendimiento con dos categorías posibles: bajo, alto.
+* Supongamos que el tipo de docente tiene un efecto sobre el rendimiento y obtenemos una tabla como la siguiente. Es decir, las variables **no son independientes**
+
+---
+
+```{r, echo = FALSE}
+mat <- matrix(nrow = 3, ncol = 3)
+mat[, 3] <- c(60, 40, 100)
+mat[, 2] <- c(0, 50, 40)
+mat[, 1] <- c(50, 0, 60)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Alto", "Total"))
+
+mat %>%  
+    kable(digits = 2, escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = F) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 2, " " = 1)) %>% 
+    group_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+* Esto es un efecto extremo. En la práctica, si hubiera asociación entre variables, esperaríamos algo más parecido a esto:
+
+---
+
+```{r, echo = FALSE}
+mat <- matrix(nrow = 3, ncol = 3)
+mat[, 3] <- c(60, 40, 100)
+mat[, 2] <- c(8, 42, 40)
+mat[, 1] <- c(38, 12, 60)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Alto", "Total"))
+
+mat %>%  
+    kable(digits = 2, escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = F) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 2, " " = 1)) %>% 
+    group_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+---
+
+## Frecuencias esperadas
+
+* ¿Qué observaríamos si las variables fueran independientes?
+
+```{r, echo = FALSE}
+mat <- matrix(nrow = 3, ncol = 3)
+mat[, 3] <- c(60, 40, NA)
+mat[3, ] <- c(60, 40, 100)
+
+for(i in 1:(nrow(mat)-1)){
+    for(j in 1:(ncol(mat)-1)){
+        mat[i, j] <- mat[i, ncol(mat)] * mat[nrow(mat) * j] / mat[nrow(mat), ncol(mat)]
+    }
+}
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Alto", "Total"))
+
+mat %>%  
+    kable(digits = 2, escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = F) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 2, " " = 1)) %>% 
+    group_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+## Frecuencias relativas por fila para las frecuencias esperadas
+
+* Calculemnos ahora las frecuencias relativas por fila de las frecuencias esperadas
+
+```{r, echo = FALSE}
+
+for(i in 1:(nrow(mat)-1)){
+    for(j in 1:(ncol(mat)-1)){
+        mat[i, j] <- mat[i, j]/mat[i, ncol(mat)]
+    }
+    mat[i, ncol(mat)] <- 1
+}
+
+mat[3, ] <- mat[3, ] / 100
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Alto", "Total"))
+
+format(mat, digits = 2, nsmall = 2) %>%  
+    kable(digits = 2, escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = F) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 2, " " = 1)) %>% 
+    group_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+---
+
+* Podemos observar que cuando las variables son independientes, las frecuencias relativas por fila para autoritario y democrático son iguales a las relativas del total.
+* Es decir, no importa que valor tome la variable tipo de docente, las frecuencias relativas por fila para el rendimiento bajo y alto, son iguales.
+
+## Grado de asociación
+
+* ¿Cómo sabemos si la relación entre variables es fuerte o débil?
+* Utilizamos coeficientes de asociación.
+
+### Dos variables dicotómicas (nominales con 2 categorías)
+
+* Q de Kendall - Yule. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.
+* $\varphi$ de Yule [0, 1]. 0 indica independencia. Mientras más cerca a 1, mayor grado de asociación
+
+### Nominales con más de dos categorías
+
+* C de contingencia. [0, $C_{max}$ < 1]. Mayor intensidad de asociación mientras más cerca a $C_{max}$.
+* V de Cramer. [0, 1]
+
+## Asociación en variables ordinales
+
+* Correlación por rangos de Spearman. $r_s$
+
+## Asociación en variables cuantitativas (intervalares y proporcionales)
+
+* Supongamos que estamos realizando un estudio sobre memoria en personas. Incluimos a 100 personas en el estudio. Les enseñamos una lista de 30 palabras. Medimos la cantidad de palabras recordadas y la edad de los participantes.
+* Realicemos un **gráfico de dispersión** para observar los resultados.
+
+---
+
+```{r}
+palabras <- read.csv2("../data/npalabras_edad.csv")
+
+palabras %>% 
+    ggplot(aes(x = edad, y = npalabras)) +
+    geom_point() +
+    # geom_errorbar(aes(ymin = Media - Sd, ymax = Media + Sd), width = .05) +
+    labs(y = "Cantidad de Palabras", x = "Edad(Años)") +
+    theme_bw()
+```
+
+---
+
+* El gráfico nos sugiere que la cantidad de palabras disminuye con la edad. Es una relación inversa. Es decir, a medida que aumenta una variable, la otra disminuye
+* ¿Cómo podemos medir la intensidad de la asocición
+
+## Coeficiente r de Pearson
+
+* Coeficiente de correlación lineal de Pearson: Se simboliza con una r.
+* Toma valores entre [-1, 1]. Donde -1 indica una correlación lineal inversa perfecta. 1 indica una correlación lineal directa perfecta. 0 indica independencia.
+* En general, coeficientes mayores a 0.5 o menores a -0.5 indican un grado de asociación fuerte.
+* A medida que el r se acerca a -1 o 1, los puntos del gráfico se acercan a una recta imaginaria.
+* Veamos algunos ejemplos.
+
+## Correlación directa fuerte
+
+```{r}
+df <- read.csv2("../data/rdfuerte.csv")
+
+df %>% 
+    ggplot(aes(x = x, y = y)) +
+    geom_point() +
+    theme_bw()
+
+```
+
+r = `r cor(df$x, df$y)`
+
+
+## Correlación inversa fuerte
+
+```{r}
+df <- read.csv2("../data/rifuerte.csv")
+
+df %>% 
+    ggplot(aes(x = x, y = y)) +
+    geom_point() +
+    theme_bw()
+
+```
+
+r = `r cor(df$x, df$y)`
+
+## Correlación nula
+
+```{r}
+df <- read.csv2("../data/rnula.csv")
+
+df %>% 
+    ggplot(aes(x = x, y = y)) +
+    geom_point() +
+    theme_bw()
+
+```
+
+r = `r cor(df$x, df$y)`

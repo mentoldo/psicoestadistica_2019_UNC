@@ -1,0 +1,3992 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Relaciones entre variables</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Relaciones entre variables',
+                        subtitle: 'Universidad Nacional de Córdoba',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                        favIcon: 'relaciones_entre_variables_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Matías A. Alfonso' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="relaciones_entre_variables_files/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="relaciones_entre_variables_files/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="relaciones_entre_variables_files/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="relaciones_entre_variables_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="relaciones_entre_variables_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="relaciones_entre_variables_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="relaciones_entre_variables_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="relaciones_entre_variables_files/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="relaciones_entre_variables_files/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="relaciones_entre_variables_files/ioslides-13.5.1/js/slide-deck.js"></script>
+  <script src="relaciones_entre_variables_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="relaciones_entre_variables_files/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    summary {
+      display: list-item;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(relaciones_entre_variables_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="../css/styles.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides>
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="relaciones_entre_variables_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">14 agosto, 2019</p>
+          </hgroup>
+  </slide>
+
+<slide class=""><hgroup><h2>Relaciones entre variables</h2></hgroup><article  id="relaciones-entre-variables">
+
+<ul class = 'build'>
+<li>Hasta ahora, nos hemos centrado en la descripción de variables individuales.</li>
+<li>Comenzaremos a hablar de <strong>relaciones</strong> entre variables.</li>
+<li>Hablaremos de <strong>asociación</strong> entre variables.</li>
+<li><strong>Asociación</strong> no implica <strong>causalidad</strong></li>
+<li>Utilizaremos medidas, tablas y gráficos para evaluar la intensidad de esa asociación.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Tablas de contingencia</h2></hgroup><article  id="tablas-de-contingencia">
+
+<ul class = 'build'>
+<li>También llamadas <strong>tabla bivariada</strong>, <strong>tabla de contingencia</strong> o <strong>tabla de distribución conjunta</strong>.</li>
+<li>Es una <strong>tabla</strong> donde las filas son las categorías de una variable y las <strong>columnas</strong> son las categorías de otra.</li>
+<li>Las <strong>frecuencias conjuntas</strong> indican la cantidad de casos que corresponden a las categorías de ambas variables.</li>
+<li>Las <strong>frecuencias marginales</strong> son los totales por fila y por columna.</li>
+<li>Se pueden realizar en variables <strong>nominales</strong> y <strong>ordinales</strong> (y en variables de nivel superior)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Ejemplo</h2></hgroup><article  id="ejemplo">
+
+<ul class = 'build'>
+<li>Supongamos que queremos saber si el autoritarismo del docente está relacionado al rendimiento de los alumnos</li>
+<li><p>Tenemos entonces las siguientes variables:</p></li>
+<li>Tipo de docente:
+
+<ol class = 'build'>
+<li>Autoritario</li>
+<li>Democrático</li>
+</ol></li>
+<li>Rendimiento:
+
+<ol class = 'build'>
+<li>Bajo</li>
+<li>Medio</li>
+<li>Alto</li>
+</ol></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Matriz de datos</h2></hgroup><article  id="matriz-de-datos">
+
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+
+id
+
+</th>
+
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+
+tipo
+
+</th>
+
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+
+rendimiento
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+5
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+8
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+9
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+10
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+11
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+12
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+13
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+14
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+15
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+16
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+17
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+18
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+19
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+20
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+21
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+22
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+23
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+24
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+25
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+26
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+27
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+28
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+29
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+30
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+31
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+32
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+33
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+34
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+35
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+36
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+37
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+38
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+39
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+40
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+41
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+42
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+43
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+44
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+45
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+46
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+47
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+48
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+49
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+50
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+51
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+52
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+53
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+54
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+55
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+56
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+57
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+58
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+59
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+60
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+61
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+62
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+63
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+64
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+65
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+66
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+67
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+68
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+69
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+70
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+71
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+72
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+73
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+74
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+75
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+76
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+77
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+78
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+79
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+80
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+81
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+82
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+83
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+84
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+85
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+86
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+87
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+88
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+89
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+90
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+91
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+92
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+93
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+94
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+95
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+96
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+97
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Alto
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+98
+
+</td>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+Bajo
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+99
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+100
+
+</td>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+Medio
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table></div>
+
+</article></slide><slide class=""><hgroup><h2>Tabla de contingencia</h2></hgroup><article  id="tabla-de-contingencia">
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Medio
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Tabla de contingencia</h2></hgroup><article  id="tabla-de-contingencia-1">
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Medio
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+10
+
+</td>
+
+<td style="text-align:left;">
+
+15
+
+</td>
+
+<td style="text-align:left;">
+
+14
+
+</td>
+
+<td style="text-align:left;">
+
+39
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+19
+
+</td>
+
+<td style="text-align:left;">
+
+23
+
+</td>
+
+<td style="text-align:left;">
+
+19
+
+</td>
+
+<td style="text-align:left;">
+
+61
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+29
+
+</td>
+
+<td style="text-align:left;">
+
+38
+
+</td>
+
+<td style="text-align:left;">
+
+33
+
+</td>
+
+<td style="text-align:left;">
+
+100
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Tabla de contingencia</h2></hgroup><article  id="tabla-de-contingencia-2">
+
+<ul class = 'build'>
+<li>La fila y columna <strong>Total</strong> se denominan <strong>frecuencias marginales</strong> por fila y por columna.</li>
+<li>Las tablas de contingencia también se pueden presentar por <strong>frecuencias relativas por fila</strong>, <strong>frecuencias relativas por columna</strong> y <strong>frecuencias relativas al total</strong>.</li>
+<li>Construyamos estas tres tablas en el ejemplo anterior.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias relativas por filas</h2></hgroup><article  id="frecuencias-relativas-por-filas">
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Medio
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+0.26
+
+</td>
+
+<td style="text-align:left;">
+
+0.38
+
+</td>
+
+<td style="text-align:left;">
+
+0.36
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+0.31
+
+</td>
+
+<td style="text-align:left;">
+
+0.38
+
+</td>
+
+<td style="text-align:left;">
+
+0.31
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+0.29
+
+</td>
+
+<td style="text-align:left;">
+
+0.38
+
+</td>
+
+<td style="text-align:left;">
+
+0.33
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias relativas por fila</h2></hgroup><article  id="frecuencias-relativas-por-fila">
+
+<ul class = 'build'>
+<li>¿Cómo se lee?</li>
+<li>El 26% de los alumnos que tuvieron un docente autoritario tiene rendimiento bajo</li>
+<li>El 31% de los alumnos que tuvieron un docente democrático tiene rendimiento alto</li>
+<li>El 29% de los alumnos tiene rendimiento bajo</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias relativas por columna</h2></hgroup><article  id="frecuencias-relativas-por-columna">
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Medio
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+0.34
+
+</td>
+
+<td style="text-align:left;">
+
+0.39
+
+</td>
+
+<td style="text-align:left;">
+
+0.42
+
+</td>
+
+<td style="text-align:left;">
+
+0.39
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+0.66
+
+</td>
+
+<td style="text-align:left;">
+
+0.61
+
+</td>
+
+<td style="text-align:left;">
+
+0.58
+
+</td>
+
+<td style="text-align:left;">
+
+0.61
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias relativas por columna</h2></hgroup><article  id="frecuencias-relativas-por-columna-1">
+
+<ul class = 'build'>
+<li>El 34% de los alumnos con rendimiento bajo tuvo un docente autoritario</li>
+<li>El 66% de los docentes con rendimiento bajo tuvo un docente democrático</li>
+<li>El 39% de los alumnos tuvieron un docente autoritario</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias relativas al total</h2></hgroup><article  id="frecuencias-relativas-al-total">
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Medio
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+0.1
+
+</td>
+
+<td style="text-align:left;">
+
+0.15
+
+</td>
+
+<td style="text-align:left;">
+
+0.14
+
+</td>
+
+<td style="text-align:left;">
+
+0.39
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+0.19
+
+</td>
+
+<td style="text-align:left;">
+
+0.23
+
+</td>
+
+<td style="text-align:left;">
+
+0.19
+
+</td>
+
+<td style="text-align:left;">
+
+0.61
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+0.29
+
+</td>
+
+<td style="text-align:left;">
+
+0.38
+
+</td>
+
+<td style="text-align:left;">
+
+0.33
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias relativas al total</h2></hgroup><article  id="frecuencias-relativas-al-total-1">
+
+<ul class = 'build'>
+<li>El 10% de los alumnos tuvieron un docente autoritario y un rendimiento bajo</li>
+<li>El 19% de los alumnos tuvieron un docente democrático y un rendimiento alto</li>
+<li>El 29% de los alumnos tuvo un rendimiento bajo.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>El grado de asociación</h2></hgroup><article  id="el-grado-de-asociacion">
+
+<ul class = 'build'>
+<li>Decimos que eventos son independientes si la ocurrencia de uno de ellos no afecta la ocurrencia del otro.</li>
+<li><strong>Definición</strong>: Dos variables son estadísticamente independientes si la frecuencia relativa de cada celda es igual al producto de las <strong>frecuencias relativas marginales</strong> de la fila y columna a las que la celda pertenece.</li>
+<li>Volvamos al ejemplo anterior, pero ahora supongamos que medimos la variable rendimiento con dos categorías posibles: bajo, alto.</li>
+<li>Supongamos que el tipo de docente tiene un efecto sobre el rendimiento y obtenemos una tabla como la siguiente. Es decir, las variables <strong>no son independientes</strong></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+<td style="text-align:left;">
+
+0
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+0
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+<td style="text-align:left;">
+
+100
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<ul class = 'build'>
+<li>Esto es un efecto extremo. En la práctica, si hubiera asociación entre variables, esperaríamos algo más parecido a esto:</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+48
+
+</td>
+
+<td style="text-align:left;">
+
+12
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+12
+
+</td>
+
+<td style="text-align:left;">
+
+28
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+<td style="text-align:left;">
+
+100
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias esperadas</h2></hgroup><article  id="frecuencias-esperadas">
+
+<ul class = 'build'>
+<li>¿Qué observaríamos si las variables fueran independientes?</li>
+</ul>
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+36
+
+</td>
+
+<td style="text-align:left;">
+
+24
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+24
+
+</td>
+
+<td style="text-align:left;">
+
+16
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+<td style="text-align:left;">
+
+100
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias relativas por fila para las frecuencias esperadas</h2></hgroup><article  id="frecuencias-relativas-por-fila-para-las-frecuencias-esperadas">
+
+<ul class = 'build'>
+<li>Calculemnos ahora las frecuencias relativas por fila de las frecuencias esperadas</li>
+</ul>
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+0.6
+
+</td>
+
+<td style="text-align:left;">
+
+0.4
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+0.6
+
+</td>
+
+<td style="text-align:left;">
+
+0.4
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+0.6
+
+</td>
+
+<td style="text-align:left;">
+
+0.4
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<ul class = 'build'>
+<li>Podemos observar que cuando las variables son independientes, las frecuencias relativas por fila para autoritario y democrático son iguales a las relativas del total.</li>
+<li>Es decir, no importa que valor tome la variable tipo de docente, las frecuencias relativas por fila para el rendimiento bajo y alto, son iguales.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Grado de asociación</h2></hgroup><article  id="grado-de-asociacion">
+
+<ul class = 'build'>
+<li>¿Cómo sabemos si la relación entre variables es fuerte o débil?</li>
+<li>Utilizamos coeficientes de asociación.</li>
+</ul>
+
+<h3>Dos variables dicotómicas (nominales con 2 categorías)</h3>
+
+<ul class = 'build'>
+<li>Q de Kendall - Yule. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.</li>
+<li>\(\varphi\) de Yule [0, 1]. 0 indica independencia. Mientras más cerca a 1, mayor grado de asociación.</li>
+<li>$r_{tet} [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.</li>
+</ul>
+
+<h3>Nominales con más de dos categorías</h3>
+
+<ul class = 'build'>
+<li>C de contingencia. [0, \(C_{max}\) &lt; 1]. Mayor intensidad de asociación mientras más cerca a \(C_{max}\).</li>
+<li>V de Cramer. [0, 1]</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Asociación en variables ordinales</h2></hgroup><article  id="asociacion-en-variables-ordinales">
+
+<ul class = 'build'>
+<li>Correlación por rangos de Spearman. \(r_s\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Asociación en variables cuantitativas (intervalares y proporcionales)</h2></hgroup><article  id="asociacion-en-variables-cuantitativas-intervalares-y-proporcionales">
+
+<ul class = 'build'>
+<li>Supongamos que estamos realizando un estudio sobre memoria en personas. Incluimos a 100 personas en el estudio. Les enseñamos una lista de 30 palabras. Medimos la cantidad de palabras recordadas y la edad de los participantes.</li>
+<li>Realicemos un <strong>gráfico de dispersión</strong> para observar los resultados.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<p><img src="relaciones_entre_variables_files/figure-html/unnamed-chunk-11-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<ul class = 'build'>
+<li>El gráfico nos sugiere que la cantidad de palabras disminuye con la edad. Es una relación inversa. Es decir, a medida que aumenta una variable, la otra disminuye</li>
+<li>¿Cómo podemos medir la intensidad de la asocición</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Coeficiente r de Pearson</h2></hgroup><article  id="coeficiente-r-de-pearson">
+
+<ul class = 'build'>
+<li>Coeficiente de correlación lineal de Pearson: Se simboliza con una r.</li>
+<li>Toma valores entre [-1, 1]. Donde -1 indica una correlación lineal inversa perfecta. 1 indica una correlación lineal directa perfecta. 0 indica independencia.</li>
+<li>En general, coeficientes mayores a 0.5 o menores a -0.5 indican un grado de asociación fuerte.</li>
+<li>A medida que el r se acerca a -1 o 1, los puntos del gráfico se acercan a una recta imaginaria.</li>
+<li>Veamos algunos ejemplos.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Correlación directa fuerte</h2></hgroup><article  id="correlacion-directa-fuerte">
+
+<p><img src="relaciones_entre_variables_files/figure-html/unnamed-chunk-12-1.png" width="720" /></p>
+
+<p>r = 0.9712959</p>
+
+</article></slide><slide class=""><hgroup><h2>Correlación inversa fuerte</h2></hgroup><article  id="correlacion-inversa-fuerte">
+
+<p><img src="relaciones_entre_variables_files/figure-html/unnamed-chunk-13-1.png" width="720" /></p>
+
+<p>r = -0.9678475</p>
+
+</article></slide><slide class=""><hgroup><h2>Correlación nula</h2></hgroup><article  id="correlacion-nula">
+
+<p><img src="relaciones_entre_variables_files/figure-html/unnamed-chunk-14-1.png" width="720" /></p>
+
+<p>r = -0.0147557</p>
+
+</article></slide><slide class=""><hgroup><h2>Coeficiente de determinación \(R^2\)</h2></hgroup><article  id="coeficiente-de-determinacion-r2">
+
+<ul class = 'build'>
+<li>Cuando elevamos r al cuadrado, obtenemos el coeficiente de determinación, que se indica como \(R^2\).<br/></li>
+<li>Mide el porcentaje de la varianza que es compartida por las variables.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Otras medidas</h2></hgroup><article  id="otras-medidas">
+
+<h3>Una dicotómica real y una proporcional</h3>
+
+<ul class = 'build'>
+<li>\(r_{pb}\) Punto biserial. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.</li>
+</ul>
+
+<h3>Una dicotómica proveniente de una continua y una proporcional</h3>
+
+<ul class = 'build'>
+<li>\(r_b\) Biserial. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.</li>
+</ul></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
