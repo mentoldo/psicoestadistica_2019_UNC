@@ -21,7 +21,7 @@ Para comenzar, usted trabajará únicamente con la primera hipótesis. Estamos i
 
   i) Recodifique la variable P14 (Comportamiento antisocial) de la sigiente manera. Asigne "NINGUNA" al valor 1 y "ALGUNA" a los valores del 2 al 5. Llame a esta nueva variable "ANTISOCIAL".  
   ii) Realize una tabla de contingencia entre P1 y "ANTISOCIAL", y solicite a Infostat la tabla de valores esperados. Con esos resultados, realice manualmente el cálculo del $\chi^2$. Corrobore que se corresponde con el valor arrojado por el software.  
-  iii) Calcule el coeficiente Q de Kendall y el $\phi$ de Yule (revise las fórmulas en el libro) e indique si las variables se encuentran asociadas. Indique si la asociación es nula, leve, moderada o fuerte  
+  iii) Calcule el coeficiente Q de Kendall y el $\varphi$ de Yule (revise las fórmulas en el libro) e indique si las variables se encuentran asociadas. Indique si la asociación es nula, leve, moderada o fuerte  
   iv) Realice una tabla de frecuencias marginales para la variable sexo (por fila o por columna, dependiendo en qué orden acomodó las variables). ¿Descriptivamente, los datos sugieren que los hombres son más violentos?  
     
 
