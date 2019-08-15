@@ -334,12 +334,37 @@ matr %>%
 
 * ¿Cómo sabemos si la relación entre variables es fuerte o débil?
 * Utilizamos coeficientes de asociación.
+* La mayoría de los test de asociación están basados en el $\chi^2$ de Pearson.
+
+## $\chi^2$ de Pearson
+
+$$\chi^2 =  \sum_{i,j} \frac{f_{i,j}^o - f_{i,j}^e}{f_{i,j}^e}$$
+
+Donde:  
+* $f_{i,j}^o$: frecuencias observadas  
+* f_{i,j}^e$: frecuencias esperadas  
+
+## $\chi^2$ de Pearson
+
+* Es una medida de distancia de las frecuencias observadas, respecto de las esperadas si las variables fueran independientes.  
+* Es una medida absoluta.  
+* El 0 indica independencia.  
+* Su **valor máximo** depende del número de casos, y de la cantidad de filas y columnas que tenga la tabla. Para interpretarlonececitamos relativizarlo.  
+
+## $\chi^2$ de Pearson
+
+* Si nos preguntan si Buenos Aires queda cerca o lejos, una buena pregunta sería: ¿con respecto a qué?. Si lo comparamos con China, podremos decir que es cerca. Si lo comparamos con el centro de la ciudad, podremos decir que es lejos. Algo parecido sucede con el $\chi^2$.
+* Es por ello que se utilizan algunas medidas interpretación más sencilla. La mayoría de ellas está basada en el cálculo del $\chi^2$
+
+## Grado de asociación
 
 ### Dos variables dicotómicas (nominales con 2 categorías)
 
 * Q de Kendall - Yule. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.
 * $\varphi$ de Yule [0, 1]. 0 indica independencia. Mientras más cerca a 1, mayor grado de asociación.
-* $r_{tet} [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.
+* $r_{tet}$ [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.
+
+## Grado de asociación
 
 ### Nominales con más de dos categorías
 
