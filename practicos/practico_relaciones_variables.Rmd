@@ -15,7 +15,9 @@ Suponga que está estudiando una teoría que plantea que los hombres son más vi
 - Los hombres son más violentos que las mujeres.  
 - Esas diferencias tienen un componente aprendido.   
 
-Para comenzar, usted trabajará únicamente con la primera hipótesis. Estamos interesados en evaluar si hay alguna relación entre el sexo y el comportamiento antisocial. Realizaremos un análisis descriptivo para evaluar si los datos sugieren descriptivamente esta hipótesis.    
+Para comenzar, usted trabajará únicamente con la primera hipótesis. Estamos interesados en evaluar si hay alguna relación entre el sexo y el comportamiento antisocial. Realizaremos un análisis descriptivo para evaluar si los datos sugieren descriptivamente esta hipótesis[^1].    
+
+[^1]: En las próximas unidades, cuando estudiemos inferencia, veremos herramientas más sofisticadas y precisas para realizar testeo de hipótesis.
 
   i) Recodifique la variable P14 (Comportamiento antisocial) de la sigiente manera. Asigne "NINGUNA" al valor 1 y "ALGUNA" a los valores del 2 al 5. Llame a esta nueva variable "ANTISOCIAL".  
   ii) Realize una tabla de contingencia entre P1 y "ANTISOCIAL", y solicite a Infostat la tabla de valores esperados. Con esos resultados, realice manualmente el cálculo del $\chi^2$. Corrobore que se corresponde con el valor arrojado por el software.  
@@ -36,4 +38,4 @@ Usted trabaja con una teoría que clasifica a las generaciones en función del m
 
   i)  Recodifique la variable Edad en tres categoría: de 18 a 22 años, CENTENIALS. De 22 a 32 años MILLENIALS. De 32 a 35 GENERACIONX. Llamaremos a esta nueva variable GENERACION.  
   ii) Realice una tabla de distribución conjunta entre GENERACION y P5. Calcule los coeficientes de asociación V de Cramer y C de Pearson. Interprete.  
-  iii) Realice una tabla de frecuencias relativas a P5 (por fila o por columna, dependiendo de como acomodó la tabla). ¿Cuál es la red social preferida para cada una de las generaciones especificadas?  
+  iii) Realice una tabla de frecuencias conjuntas relativas a P5 (por fila o por columna, dependiendo de como acomodó la tabla). ¿Cuál es la red social preferida para cada una de las generaciones especificadas?  

@@ -464,3 +464,8 @@ r = `r cor(df$x, df$y)`
 ### Una dicotómica proveniente de una continua y una proporcional
 
 * $r_b$ Biserial. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.
+
+
+## Actividades Prácticas
+
+[link](./practico_relaciones_variables.pdf)
