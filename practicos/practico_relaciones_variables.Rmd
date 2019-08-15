@@ -1,0 +1,39 @@
+---
+title: "Relaciones entre variables"
+subtitle: "Práctico"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Actividad 1
+
+Suponga que está estudiando una teoría que plantea que los hombres son más violentos que las mujeres y que atribuye esa diferencia a componentes culturales. Tenemos al menos dos hipótesis:  
+
+- Los hombres son más violentos que las mujeres.  
+- Esas diferencias tienen un componente aprendido.   
+
+Para comenzar, usted trabajará únicamente con la primera hipótesis. Estamos interesados en evaluar si hay alguna relación entre el sexo y el comportamiento antisocial. Realizaremos un análisis descriptivo para evaluar si los datos sugieren descriptivamente esta hipótesis.    
+
+  i) Recodifique la variable P14 (Comportamiento antisocial) de la sigiente manera. Asigne "NINGUNA" al valor 1 y "ALGUNA" a los valores del 2 al 5. Llame a esta nueva variable "ANTISOCIAL".  
+  ii) Realize una tabla de contingencia entre P1 y "ANTISOCIAL", y solicite a Infostat la tabla de valores esperados. Con esos resultados, realice manualmente el cálculo del $\chi^2$. Corrobore que se corresponde con el valor arrojado por el software.  
+  iii) Calcule el coeficiente Q de Kendall y el $\phi$ de Yule (revise las fórmulas en el libro) e indique si las variables se encuentran asociadas. Indique si la asociación es nula, leve, moderada o fuerte  
+  iv) Realice una tabla de frecuencias marginales para la variable sexo (por fila o por columna, dependiendo en qué orden acomodó las variables). ¿Descriptivamente, los datos sugieren que los hombres son más violentos?  
+    
+
+## Actividad 2
+
+Imagine que se encuentra estudiando el fenómeno de las redes sociales digitales. Usted supone que las nuevas generaciones destinas más tiempo a las redes sociales que las generaciones anteriores:  
+
+  i) Solicite a Infostat un coeficiente de correlación r de Pearson. Interprete. ¿Las variables están asociadas? ¿Cómo es la intensidad de esa asociación? ¿Los adultos o los jóvenes pasan más tiempo en las redes sociales?  
+    
+   
+## Actividad 3
+
+Usted trabaja con una teoría que clasifica a las generaciones en función del momento de su historia en que las personas han sido atravezadas por el fenómeno de la digitalización. La GENERACIÓN X, son digitalizados tardíos, alrededor de los 20 años. Los MILLENIALS, son digitalizados luego de 3 o 4 años, luego de aprender a hablar, leer y escribir. Por último los CENTENIALLS, que tienen acceso a la tecnología desde el nacimiento, son nativos digitales. Usted sospecha que las distintas generaciones tienen distintas preferencias por las redes sociales. Observe si los datos apoyan descriptivamente esta hipótesis:  
+
+  i)  Recodifique la variable Edad en tres categoría: de 18 a 22 años, CENTENIALS. De 22 a 32 años MILLENIALS. De 32 a 35 GENERACIONX. Llamaremos a esta nueva variable GENERACION.  
+  ii) Realice una tabla de distribución conjunta entre GENERACION y P5. Calcule los coeficientes de asociación V de Cramer y C de Pearson. Interprete.  
+  iii) Realice una tabla de frecuencias relativas a P5 (por fila o por columna, dependiendo de como acomodó la tabla). ¿Cuál es la red social preferida para cada una de las generaciones especificadas?  
