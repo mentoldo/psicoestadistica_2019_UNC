@@ -34,8 +34,8 @@ Imagine que se encuentra estudiando el fenómeno de las redes sociales digitales
    
 ## Actividad 3
 
-Usted trabaja con una teoría que clasifica a las generaciones en función del momento de su historia en que las personas han sido atravezadas por el fenómeno de la digitalización. La GENERACIÓN X, son digitalizados tardíos, alrededor de los 20 años. Los MILLENIALS, son digitalizados luego de 3 o 4 años, luego de aprender a hablar, leer y escribir. Por último los CENTENIALLS, que tienen acceso a la tecnología desde el nacimiento, son nativos digitales. Usted sospecha que las distintas generaciones tienen distintas preferencias por las redes sociales. Observe si los datos apoyan descriptivamente esta hipótesis:  
+Usted trabaja con una teoría que clasifica a las generaciones en función del momento de su historia en que las personas han sido atravezadas por el fenómeno de la digitalización. La GENERACIÓN X, son digitalizados tardíos, alrededor de los 20 años. Los MILLENIALS, son digitalizados luego de 3 o 4 años, luego de aprender a hablar. Por último los CENTENIALLS, que tienen acceso a la tecnología desde el nacimiento, son nativos digitales. Usted sospecha que las distintas generaciones tienen distintas preferencias por las redes sociales. Observe si los datos apoyan descriptivamente esta hipótesis:  
 
-  i)  Recodifique la variable Edad en tres categoría: de 18 a 22 años, CENTENIALS. De 22 a 32 años MILLENIALS. De 32 a 35 GENERACIONX. Llamaremos a esta nueva variable GENERACION.  
+  i)  Recodifique la variable Edad en tres categorías: de 18 a 22 años, CENTENIALS. De 22 a 32 años MILLENIALS. De 32 a 35 GENERACIONX. Llamaremos a esta nueva variable GENERACION.  
   ii) Realice una tabla de distribución conjunta entre GENERACION y P5. Calcule los coeficientes de asociación V de Cramer y C de Pearson. Interprete.  
   iii) Realice una tabla de frecuencias conjuntas relativas a P5 (por fila o por columna, dependiendo de como acomodó la tabla). ¿Cuál es la red social preferida para cada una de las generaciones especificadas?  
